@@ -9,13 +9,17 @@ export interface TaskDataType {
 
 interface TasksContextType {
     tasks: TaskDataType[],
-    setTasks: (newTasks:TaskDataType[]) => void
+    setTasks: (newTasks:TaskDataType[]) => void,
+    save: () => void
 }
 
 const taskContext = createContext<TasksContextType>({
     tasks: [],
-    setTasks:() => {}
+    setTasks:() => {},
+    save:() => {}
 })
+
+const renderContext = createContext(() => {})
 
 const useTasks = () => {
     return useContext(taskContext)
@@ -23,5 +27,6 @@ const useTasks = () => {
 
 export{
     taskContext,
+    renderContext,
     useTasks
 }

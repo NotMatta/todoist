@@ -5,10 +5,25 @@ import { taskContext, TaskDataType } from "./task-util"
 const TasksProvider = ({children}:{children:React.ReactNode}) => {
 
     const [tasks,setTasks] = useState<TaskDataType[]>([])
+    const [load,setLoad] = useState(false)
+
     useEffect(() => {
-        console.log(tasks)
-    },[tasks])
-    return <taskContext.Provider value={{tasks,setTasks}}>
+        if(load){
+            window.localStorage.setItem("tasks",JSON.stringify(tasks))
+        }
+        if(!load){
+            const storedTasks = window.localStorage.getItem("tasks")
+            if (storedTasks){
+                const parsedTasks = JSON.parse(storedTasks)
+                setTasks(parsedTasks)
+            }
+            setLoad(true)
+        }
+    },[load,tasks])
+
+    return <taskContext.Provider value={{tasks,setTasks,save:() => {
+        window.localStorage.setItem("tasks",JSON.stringify(tasks))
+    }}}>
         {children}
     </taskContext.Provider>
     
