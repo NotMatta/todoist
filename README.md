@@ -3,7 +3,7 @@
 ## Idea
 A React app that tracks some tasks with some drag and drop faetures and local storage saving.
 
-[live demo]() 
+[live demo](https://notmatta.github.io/todoist/) 
 
 ## Tech Used:
 - Vite / React
